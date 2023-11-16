@@ -1,0 +1,25 @@
+{
+    "name": "farmit/rrrbac-for-laravel",
+    "description": "Role, routes, rules, based access control.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Farmit\\RrrbacForLaravel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Farmit",
+            "email": "info@farm.it"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.1",
+        "calebporzio/sushi": "^2.4",
+        "filament/forms": "^3.0-stable",
+        "filament/infolists": "^3.0-stable",
+        "filament/tables": "^3.0-stable",
+        "spatie/laravel-permission": "^6.0"
+    }
+}
