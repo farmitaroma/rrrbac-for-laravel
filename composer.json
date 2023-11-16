@@ -2,6 +2,7 @@
     "name": "farmit/rrrbac-for-laravel",
     "description": "Role, routes, rules, based access control.",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Farmit\\RrrbacForLaravel\\": "src/"
