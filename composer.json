@@ -22,5 +22,12 @@
         "filament/infolists": "^3.0-stable",
         "filament/tables": "^3.0-stable",
         "spatie/laravel-permission": "^6.0"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan filament:install --infolists",
+            "php artisan filament:install --forms",
+            "php artisan filament:install --tables"
+        ]
     }
 }
