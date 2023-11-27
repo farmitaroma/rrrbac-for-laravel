@@ -17,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['auth', 'web'], 'prefix' => 'rbac'], function () {
-    Route::resource('roles', RolesController::class)->only(['index', 'edit']);
-    Route::resource('permissions', PermissionsController::class)->only(['index']);
-    Route::resource('users', UserController::class)->only(['index', 'edit']);
-    Route::get('menu-items', MenuItemsTable::class)->name('menu-items');
+Route::name('rbac.')->group(function () {
+    Route::group(['middleware' => ['auth', 'web'], 'prefix' => 'rbac'], function () {
+        Route::resource('roles', RolesController::class)->only(['index', 'edit']);
+        Route::resource('permissions', PermissionsController::class)->only(['index']);
+        Route::resource('users', UserController::class)->only(['index']);
+        Route::get('menu-items', MenuItemsTable::class)->name('menu-items');
+    });
 });
