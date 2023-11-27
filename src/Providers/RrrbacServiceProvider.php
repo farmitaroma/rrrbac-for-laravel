@@ -24,7 +24,13 @@ class RrrbacServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/rrrbac.php' => config_path('rrrbac.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->publishes([
+            __DIR__ . '/../../dist/assets/rrrbac-cd13126b.css' => public_path('css/rrrbac/rrrbac.css'),
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/../../database/migrations' => database_path('migrations'),
+        ]);
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'rrrbac');
 
