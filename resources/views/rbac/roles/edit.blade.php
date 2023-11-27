@@ -9,7 +9,7 @@
         <x-filament::tabs label="Content tabs" class="mb-4">
             <x-filament::tabs.item
                 :active="!$tab || $tab === '1'"
-                :href="route('roles.edit', [
+                :href="route('rbac.roles.edit', [
                     'tab' => 1,
                     'role' => $authItem
                 ])"
@@ -21,7 +21,7 @@
 
             <x-filament::tabs.item
                 :active="$tab === '2'"
-                :href="route('roles.edit', [
+                :href="route('rbac.roles.edit', [
                     'tab' => 2,
                     'role' => $authItem
                 ])"
@@ -29,6 +29,18 @@
                 icon="heroicon-m-hand-raised"
             >
                 Routes
+            </x-filament::tabs.item>
+
+            <x-filament::tabs.item
+                :active="$tab === '3'"
+                :href="route('rbac.roles.edit', [
+                    'tab' => 3,
+                    'role' => $authItem
+                ])"
+                tag="a"
+                icon="heroicon-m-code-bracket-square"
+            >
+                Livewire Components
             </x-filament::tabs.item>
         </x-filament::tabs>
     </div>
@@ -49,6 +61,14 @@
 
             <div class="col-span-1">
                 @livewire('rrrbac::permission-available', ['authItem' => $authItem, 'type' => 'route'])
+            </div>
+        @elseif($tab === '3')
+            <div class="col-span-1">
+                @livewire('rrrbac::permission-assigned', ['authItem' => $authItem, 'type' => 'component'])
+            </div>
+
+            <div class="col-span-1">
+                @livewire('rrrbac::permission-available', ['authItem' => $authItem, 'type' => 'component'])
             </div>
         @endif
     </div>
