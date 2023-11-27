@@ -7,9 +7,10 @@ use Farmit\RrrbacForLaravel\Models\Role;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\On;
-use Illuminate\Database\Eloquent\Builder;
+use Livewire\Component;
 
 class PermissionAvailable extends BaseAssignmentTable
 {
@@ -35,6 +36,26 @@ class PermissionAvailable extends BaseAssignmentTable
                 ->toArray();
 
             Permission::insert($new_routes);
+        } elseif ($type === 'component') {
+            $components_collection = collect(scandir(app_path() . '/Livewire'))
+                ->filter(fn($path) => $path !== '.' && $path !== '..')
+                ->map(fn($class_filename) => preg_replace('/\.php$/', '', $class_filename))
+                ->map(function ($class) {
+                    return new \ReflectionClass("App\\Livewire\\$class");
+                })
+                ->filter(fn($reflection_class) => $reflection_class->isSubclassOf('Livewire\\Component'))
+                ->map(fn($reflection_class) => new $reflection_class->name)
+                ->map(fn(Component $component) => 'component::' . $component::class);
+
+            $new_components = $components_collection
+                ->diff(
+                    Permission::whereIn('name', $components_collection)->get()
+                        ->pluck('name')
+                )
+                ->map(fn($component) => ['name' => (string)$component, 'guard_name' => 'web'])
+                ->toArray();
+
+            Permission::insert($new_components);
         }
     }
 
