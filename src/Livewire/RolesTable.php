@@ -35,7 +35,7 @@ class RolesTable extends Component implements HasForms, HasTable
             ])
             ->actions([
                 EditAction::make()
-                    ->url(fn(Role $record) => route('roles.edit', $record)),
+                    ->url(fn(Role $record) => route('rbac.roles.edit', $record)),
                 DeleteAction::make()
                     ->action(function ($record) {
                         $record->rules()->delete();
