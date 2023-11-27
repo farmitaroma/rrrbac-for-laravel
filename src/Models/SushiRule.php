@@ -20,7 +20,7 @@ class SushiRule extends Model
             })
             ->filter(fn($reflection_class) => !$reflection_class->isAbstract())
             ->map(fn($reflection_class) => new $reflection_class->name)
-            ->map(fn(Model $rule) => [
+            ->map(fn($rule) => [
                 'name' => $rule::class,
                 'description' => $rule->description,
             ])
