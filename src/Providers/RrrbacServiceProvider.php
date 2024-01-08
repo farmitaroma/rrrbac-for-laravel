@@ -72,7 +72,15 @@ class RrrbacServiceProvider extends ServiceProvider
 
             $items = MenuItem::all()->sortBy('order');
 
-            $main_items = $items->where('menu_item_id', null)->toArray();
+            $main_items = $items->where('menu_item_id', null)
+                ->filter(function ($item) {
+                    if (isset($item['link'])) {
+                        return auth()->user()->can('route::' . $item['link']);
+                    }
+
+                    return true;
+                })
+                ->toArray();
 
             $children_items = $items->where('menu_item_id', '!=', null)->toArray();
 
