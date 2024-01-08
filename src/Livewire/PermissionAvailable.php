@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Spatie\Permission\PermissionRegistrar;
 
 class PermissionAvailable extends BaseAssignmentTable
 {
@@ -57,6 +58,8 @@ class PermissionAvailable extends BaseAssignmentTable
 
             Permission::insert($new_components);
         }
+
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
     public function table(Table $table): Table
