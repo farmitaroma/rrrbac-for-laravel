@@ -16,6 +16,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -96,8 +97,15 @@ abstract class BaseAssignmentTable extends Component implements HasForms, HasTab
             PermissionAvailable::class => Permission::query(),
         };
 
+        $db_connection_driver = DB::getDriverName();
+
+        $db_regexp_functions = [
+            'mysql' => 'REGEXP',
+            'pgsql' => '~'
+        ];
+
         if ($this->type !== '') {
-            $query->where('name', 'REGEXP', "^$this->type::");
+            $query->where('name', $db_regexp_functions[$db_connection_driver], "^$this->type::");
 
             if ($this->type === 'route') {
                 $type_pattern = '^[a-z]+(?=::)';
@@ -111,7 +119,7 @@ abstract class BaseAssignmentTable extends Component implements HasForms, HasTab
                 $query->selectRaw("*, $select_type, $select_grouped_by");
             }
         } else {
-            $query->whereNot('name', 'REGEXP', '^[a-z]+::');
+            $query->whereNot('name', $db_regexp_functions[$db_connection_driver], '^[a-z]+::');
         }
 
         return $query;
