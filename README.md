@@ -17,7 +17,7 @@ Change in _config/permission.php_
 ```Spatie\Permission\Models\Role::class``` with ```\Farmit\RrrbacForLaravel\Models\Role::class```  
 ```Spatie\Permission\Models\Permission::class``` with ```\Farmit\RrrbacForLaravel\Models\Permission::class```
 
-Then publish RRRBac vendor running ```php artisan vendor:publish --provider="\Farmit\RrrbacForLaravel\Providers\RrrbacServiceProvider"```
+Then publish RRRBac vendor running ```php artisan vendor:publish --provider="Farmit\RrrbacForLaravel\Providers\RrrbacServiceProvider"```
 
 Run ```php artisan migrate```
 
