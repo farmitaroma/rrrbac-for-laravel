@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:css": "tailwindcss build ./resources/css/rrrbac.css -o ./dist/rrrbac.css",
+    "build:css": "tailwindcss build -i ./resources/css/rrrbac.css -o ./dist/rrrbac.css --minify",
     "build": "vite build"
   },
   "devDependencies": {
