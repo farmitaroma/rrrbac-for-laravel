@@ -25,7 +25,7 @@ class RrrbacServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/../../dist/assets/rrrbac-cd13126b.css' => public_path('css/rrrbac/rrrbac.css'),
+            __DIR__ . '/../../dist/rrrbac.css' => public_path('css/rrrbac/rrrbac.css'),
         ]);
 
         $this->publishes([
